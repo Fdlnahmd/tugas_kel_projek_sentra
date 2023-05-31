@@ -214,7 +214,7 @@ if (isset($_POST['submit'])) {
         </p>
         <p>
           Github :
-          <a href="https://github.com/Fdlnahmd/projek_sentra_bend1.git">Github</a>
+          <a href="https://github.com/Fdlnahmd/tugas_kel_projek_sentra.git">Github</a>
         </p>
         <span>
           <button type="submit" name="submit" value="LOGIN">Login</button>
