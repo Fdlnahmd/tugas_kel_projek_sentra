@@ -1,0 +1,341 @@
+<?php
+session_start();
+if (!isset($_SESSION['login_user'])) {
+  header("location: Login.php");
+} else {
+?>
+
+  <!DOCTYPE html>
+  <html lang="en">
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" />
+    <link rel="stylesheet" href="font awesome/css/font-awesome.min.css" />
+    <style>
+      :root {
+        scroll-behavior: smooth;
+      }
+
+      #btn-back-to-top {
+        position: fixed;
+        bottom: 100px;
+        right: 20px;
+        display: none;
+        animation: fadeIn 1s ease;
+      }
+
+      @keyframes fadeIn {
+        0% {
+          opacity: 0;
+        }
+
+        100% {
+          opacity: 1;
+        }
+      }
+
+      header {
+        background-color: #fcebb6;
+      }
+
+      footer {
+        background-color: #fcebb6;
+        padding: 25px;
+      }
+
+      nav {
+        background-color: #fceaa0;
+      }
+
+      li {
+        letter-spacing: 1px;
+      }
+
+      .nav-link {
+        color: #5e412f;
+      }
+
+      .nav {
+        color: black;
+      }
+
+      .nav-link::after {
+        content: "";
+        position: absolute;
+        width: 100%;
+        transform: scaleX(0);
+        height: 2px;
+        bottom: 0;
+        left: 0;
+        background-color: black;
+        transform-origin: bottom;
+        transition: transform 0.25s ease-out;
+      }
+
+      .nav-link:hover::after {
+        transform: scaleX(1);
+        transform-origin: bottom;
+      }
+
+      .b-example-divider {
+        height: 3rem;
+        background-color: rgba(0, 0, 0, 0.1);
+        border: solid rgba(0, 0, 0, 0.15);
+        border-width: 1px 0;
+        box-shadow: inset 0 0.5em 1.5em rgba(0, 0, 0, 0.1),
+          inset 0 0.125em 0.5em rgba(0, 0, 0, 0.15);
+      }
+
+      .form-control-dark {
+        color: #fff;
+        background-color: var(--bs-dark);
+        border-color: var(--bs-gray);
+      }
+
+      .form-control-dark:focus {
+        color: #fff;
+        background-color: var(--bs-dark);
+        border-color: #fff;
+        box-shadow: 0 0 0 0.25rem rgba(255, 255, 255, 0.25);
+      }
+
+      .bi {
+        vertical-align: -0.125em;
+        fill: currentColor;
+      }
+
+      .text-small {
+        font-size: 85%;
+      }
+
+      .dropdown-toggle {
+        outline: 0;
+      }
+
+      .border {
+        background-color: #78c0ab;
+        width: 250px;
+        border-radius: 100px;
+        text-align: center;
+        margin: auto;
+      }
+
+      .border2 {
+        background-color: #78c0ab;
+        width: 300px;
+        border-radius: 100px;
+        text-align: center;
+        margin: auto;
+      }
+
+      .border3 {
+        background-color: #198754;
+        font-size: large;
+        text-align: center;
+        margin-right: auto;
+      }
+
+      .featurette-divider {
+        margin: 5rem 0;
+        /* Space out the Bootstrap <hr> more */
+      }
+
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+
+      .navMenu {
+        animation: fadeIn 1s ease;
+      }
+
+      @keyframes fadeIn {
+        0% {
+          opacity: 0;
+        }
+
+        100% {
+          opacity: 1;
+        }
+      }
+
+      .addp {
+        color: white;
+        text-decoration: none;
+      }
+    </style>
+  </head>
+
+  <body>
+    <button type="button" class="btn btn-danger btn-floating btn-lg fadein" id="btn-back-to-top">
+      <i class="fas fa-arrow-up"></i>
+    </button>
+    <svg xmlns="http://www.w3.org/2000/svg" style="display: none">
+      <symbol id="bootstrap" viewBox="0 0 118 94">
+        <title>Bootstrap</title>
+      </symbol>
+      <symbol id="home" viewBox="0 0 16 16">
+        <path d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146zM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4H2.5z" />
+      </symbol>
+      <symbol id="speedometer2" viewBox="0 0 16 16">
+        <path d="M8 4a.5.5 0 0 1 .5.5V6a.5.5 0 0 1-1 0V4.5A.5.5 0 0 1 8 4zM3.732 5.732a.5.5 0 0 1 .707 0l.915.914a.5.5 0 1 1-.708.708l-.914-.915a.5.5 0 0 1 0-.707zM2 10a.5.5 0 0 1 .5-.5h1.586a.5.5 0 0 1 0 1H2.5A.5.5 0 0 1 2 10zm9.5 0a.5.5 0 0 1 .5-.5h1.5a.5.5 0 0 1 0 1H12a.5.5 0 0 1-.5-.5zm.754-4.246a.389.389 0 0 0-.527-.02L7.547 9.31a.91.91 0 1 0 1.302 1.258l3.434-4.297a.389.389 0 0 0-.029-.518z" />
+        <path fill-rule="evenodd" d="M0 10a8 8 0 1 1 15.547 2.661c-.442 1.253-1.845 1.602-2.932 1.25C11.309 13.488 9.475 13 8 13c-1.474 0-3.31.488-4.615.911-1.087.352-2.49.003-2.932-1.25A7.988 7.988 0 0 1 0 10zm8-7a7 7 0 0 0-6.603 9.329c.203.575.923.876 1.68.63C4.397 12.533 6.358 12 8 12s3.604.532 4.923.96c.757.245 1.477-.056 1.68-.631A7 7 0 0 0 8 3z" />
+      </symbol>
+      <symbol id="table" viewBox="0 0 16 16">
+        <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm15 2h-4v3h4V4zm0 4h-4v3h4V8zm0 4h-4v3h3a1 1 0 0 0 1-1v-2zm-5 3v-3H6v3h4zm-5 0v-3H1v2a1 1 0 0 0 1 1h3zm-4-4h4V8H1v3zm0-4h4V4H1v3zm5-3v3h4V4H6zm4 4H6v3h4V8z" />
+      </symbol>
+      <symbol id="people-circle" viewBox="0 0 16 16">
+        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+        <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
+      </symbol>
+      <symbol id="grid" viewBox="0 0 16 16">
+        <path d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5v-3zM2.5 2a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zM1 10.5A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 9h3a1.5 1.5 0 0 1 1.5 1.5v3a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3z" />
+      </symbol>
+    </svg>
+    <div class="fixed-top">
+      <nav class="nav py-2 border-bottom">
+        <div class="container d-flex flex-wrap">
+          <ul class="nav me-auto">
+            <li class="nav-item dropdown">
+              <a href="admin.php" class="nav-link">Home</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a href="admin.php#about-us" class="nav-link">About Us</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a href="admin.php#menu" class="nav-link">Menu</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a href="admin.php#franchise" class="nav-link">Franchise</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a href="https://www.instagram.com/" class="nav-link">
+                <i class="fa fa-instagram"></i></a>
+            </li>
+            <li class="nav-item dropdown">
+              <a href="https://www.facebook.com/" class="nav-link">
+                <i class="fa fa-facebook"></i></a>
+            </li>
+          </ul>
+          <ul class="nav">
+            <li class="nav-item dropdown">
+              <a href="pesanan.php" class="nav-link px-2">Pesanan</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a href="Logout.php" class="nav-link px-2">Log Out</a>
+            </li>
+
+            &emsp;
+          </ul>
+        </div>
+      </nav>
+      <header class="py-3 mb-4 border-bottom">
+        <div class="container d-flex flex-wrap justify-content-center">
+          <a href="/" class="d-flex align-items-center mb-3 mb-lg-0 me-lg-auto text-dark text-decoration-none">
+            <img src="photo/FS_wordmark.png" class="bi me-2" width="150" height="62" alt="" />
+          </a>
+        </div>
+      </header>
+    </div>
+
+    <main>
+      <div id="chicken"></div>
+      <hr class="featurette-divider" />
+      <div class="album py-5 bg-light">
+        <div class="container">
+          <div class="border2">
+            <h1>Menu</h1>
+          </div>
+          <br />
+          <button class="border3">
+            <a href="add.php" class="addp">TAMBAH DAFTAR MENU</a>
+          </button>
+          <br />
+          <br />
+
+          <?php
+
+          include('koneksi.php');
+
+          $query = mysqli_query($koneksi, 'SELECT * FROM produk');
+          $result = mysqli_fetch_all($query, MYSQLI_ASSOC);
+
+
+          ?>
+
+          <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-3">
+            <?php foreach ($result as $result) : ?>
+              <div class="col" style="flex-basis: 0">
+                <div class="card shadow-sm">
+                  <img src="upload/<?php echo $result['gambar'] ?>" alt="" />
+                  <div class="card-body">
+                    <h5></h5>
+                    <p class="card-text"><?php echo $result['nama_menu'] ?></p>
+                    <p>
+                      <strong>Rp.</strong>
+                      <?php echo number_format($result['harga_menu']); ?>
+                    </p>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <div class="btn-group">
+                        <a href="edit menu.php?id=<?php echo $result['id']  ?>" class="btn btn-success btn-sm btn-block">EDIT</a>
+
+                        <a href="hapus menu.php?id=<?php echo $result['id']  ?>" class="btn btn-danger btn-sm btn-block text-light">HAPUS</a>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <?php endforeach; ?>
+          </div>
+          <br>
+          <br>
+          <script>
+            //Get the button
+            let mybutton =
+              document.getElementById("btn-back-to-top");
+
+            // When the user scrolls down 20px from the top of the document, show the button
+            window.onscroll = function() {
+              scrollFunction();
+            };
+
+            function scrollFunction() {
+              if (
+                document.body.scrollTop > 50 ||
+                document.documentElement.scrollTop > 50
+              ) {
+                mybutton.style.display = "block";
+              } else {
+                mybutton.style.display = "none";
+              }
+            }
+            // When the user clicks on the button, scroll to the top of the document
+            mybutton.addEventListener("click", backToTop);
+
+            function backToTop() {
+              document.body.scrollTop = 0;
+              document.documentElement.scrollTop = 0;
+            }
+          </script>
+
+        <?php } ?>
+    </main>
+  </body>
+
+  </html>
